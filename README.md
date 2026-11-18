@@ -5,7 +5,7 @@ Aplicación web para administrar una biblioteca de libros de programación y tec
 ## Ficha del proyecto
 
 - **Autor:** John Alejandro Conde Parra
-- **Ficha:** 3478025
+- **Ficha:** 3478023
 - **Framework:** Laravel 12
 - **Base de datos:** MySQL
 
