@@ -45,6 +45,19 @@ class BibliotecaTest extends TestCase
             ->assertDontSee('PHP moderno');
     }
 
+    public function test_forms_show_custom_required_field_messages_and_monochrome_theme(): void
+    {
+        $this->get(route('libros.create'))
+            ->assertOk()
+            ->assertSee('Escribe el título del libro.')
+            ->assertSee('Selecciona una categoría para el libro.')
+            ->assertSee('--ink: #111');
+
+        $this->get(route('categorias.create'))
+            ->assertOk()
+            ->assertSee('Escribe el nombre de la categoría.');
+    }
+
     public function test_book_can_be_created_updated_and_deleted(): void
     {
         $categoria = Categoria::create(['nombre' => 'Programación']);
