@@ -21,7 +21,15 @@ class CategoriaController extends Controller
 
     public function store(Request $request)
     {
-        Categoria::create($request->only('nombre'));
+        $datos = $request->validate([
+            'nombre' => ['required', 'string', 'max:255', 'unique:categorias,nombre'],
+        ], [
+            'nombre.required' => 'El nombre de la categoría es obligatorio.',
+            'nombre.max' => 'El nombre no puede superar los 255 caracteres.',
+            'nombre.unique' => 'Ya existe una categoría con ese nombre.',
+        ]);
+
+        Categoria::create($datos);
 
         return redirect()->route('categorias.index')->with('ok', 'Categoría creada correctamente.');
     }

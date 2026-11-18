@@ -11,6 +11,30 @@
         <a class="btn btn-primary" href="{{ route('libros.create') }}">Nuevo Libro</a>
     </div>
 
+    <form class="card card-body mb-4" method="GET" action="{{ route('libros.index') }}">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label" for="buscar">Buscar por título</label>
+                <input class="form-control" id="buscar" name="buscar" type="search" value="{{ request('buscar') }}" placeholder="Escribe un título">
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" for="categoria_id">Categoría</label>
+                <select class="form-select" id="categoria_id" name="categoria_id">
+                    <option value="">Todas las categorías</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}" @selected((string) request('categoria_id') === (string) $categoria->id)>
+                            {{ $categoria->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button class="btn btn-outline-primary flex-grow-1" type="submit">Filtrar</button>
+                <a class="btn btn-outline-secondary" href="{{ route('libros.index') }}">Limpiar</a>
+            </div>
+        </div>
+    </form>
+
     <div class="card">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
